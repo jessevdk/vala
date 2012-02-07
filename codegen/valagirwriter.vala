@@ -1083,6 +1083,11 @@ public class Vala.GIRWriter : CodeVisitor {
 			return;
 		}
 
+		if (prop.parent_symbol is Class && ((Class)prop.parent_symbol).is_fundamental())
+		{
+			return;
+		}
+
 		write_indent ();
 		buffer.append_printf ("<property name=\"%s\"", prop.name.replace ("_", "-"));
 		if (prop.get_accessor == null) {
