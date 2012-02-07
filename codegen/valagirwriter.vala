@@ -290,6 +290,14 @@ public class Vala.GIRWriter : CodeVisitor {
 			return;
 		}
 
+		if (cl.parent_symbol == null)
+		{
+			Report.warning(null,
+			               "Cannot export classes in the global namespace: %s".printf(cl.name));
+
+			return;
+		}
+
 		if (!check_accessibility (cl)) {
 			return;
 		}
