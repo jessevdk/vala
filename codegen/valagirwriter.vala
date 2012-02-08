@@ -1103,6 +1103,10 @@ public class Vala.GIRWriter : CodeVisitor {
 				}
 			}
 		}
+		if (prop.property_type.nullable) {
+			buffer.append_printf (" allow-none=\"1\"");
+		}
+
 		write_symbol_attributes (prop);
 		buffer.append_printf (">\n");
 		indent++;

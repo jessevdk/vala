@@ -2637,6 +2637,7 @@ public class Vala.GirParser : CodeVisitor {
 		push_node (element_get_name().replace ("-", "_"), false);
 		bool is_abstract = metadata.get_bool (ArgumentType.ABSTRACT, current.parent.symbol is Interface);
 
+		string allow_none = reader.get_attribute ("allow-none");
 		next ();
 
 		var comment = parse_symbol_doc ();
@@ -2655,6 +2656,9 @@ public class Vala.GirParser : CodeVisitor {
 		}
 		if (array_null_terminated) {
 			prop.set_attribute_bool ("CCode", "array_null_terminated", true);
+		}
+		if (allow_none == "1") {
+			type.nullable = true;
 		}
 		current.symbol = prop;
 
